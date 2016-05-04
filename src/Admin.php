@@ -37,18 +37,16 @@ class Admin
     }
 
     /**
-     * @param string $class
-     * @param Closure|null $callback
+     * @param string  $class
+     * @param Closure $callback
      *
      * @return $this
      */
-    public function registerModel($class, Closure $callback = null)
+    public function registerModel($class, Closure $callback)
     {
         $model = new ModelConfiguration($class);
+        call_user_func($callback, $model);
         $this->setModel($class, $model);
-        if (is_callable($callback)) {
-            call_user_func($callback, $model);
-        }
 
         return $this;
     }
