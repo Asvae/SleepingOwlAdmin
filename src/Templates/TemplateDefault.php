@@ -5,6 +5,10 @@ namespace SleepingOwl\Admin\Templates;
 use Meta;
 use SleepingOwl\Admin\Contracts\TemplateInterface;
 
+/**
+ * Uses KodiCMS Meta class (through facade) to build default template
+ * for our page.
+ */
 class TemplateDefault implements TemplateInterface
 {
     public function __construct()

@@ -54,7 +54,10 @@ class Admin
     }
 
     /**
-     * @param string $class
+     * TODO This is not a getter.
+     *
+     * @param string|object $class
+     *
      * @return ModelConfiguration
      */
     public function getModel($class)
@@ -104,6 +107,9 @@ class Admin
     {
         if (is_null($this->template)) {
             $templateClass = config('sleeping_owl.template');
+
+            // TODO Why do we instantiate another template object
+            // instead of using existing singleton?
             $this->template = app($templateClass);
         }
 
@@ -112,13 +118,15 @@ class Admin
 
     /**
      * @param string $class
-     * @param int    $priority
+     * @param int    $priority Defines position in menu.
      *
      * @return Page
      */
     public function addMenuPage($class = null, $priority = 100)
     {
-        return app('sleeping_owl.navigation')->addPage($class)->setPriority($priority);
+        return app('sleeping_owl.navigation')
+            ->addPage($class)
+            ->setPriority($priority);
     }
 
     /**
